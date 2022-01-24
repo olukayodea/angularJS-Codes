@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js" integrity="sha512-nJoOi8/9dR8KojSlwJPnE8oNCm9kkNVKPnslU+z5SCcZTNr9Y5a5bwNuH081P1zBU4f4mdDGZexgEbUFchPkYg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="personCtrl">
+Phone Number: <input type="tel" ng-model="phone" maxlength=14 mask="(999) 999-9999" canada-phone />
+<br>
+Unformatted Number: {{numberUnformated()}}
+
+</div>
+
+<script>
+var app = angular.module("myApp", ['ngMask']);
+
+app.controller('personCtrl', function($scope) {    
+    $scope.numberUnformated = function() {
+        // let removeSymbol = $scope.phone.replace(/\D/g,'');
+        let removeSymbol = $scope.phone;
+
+        if (removeSymbol !== undefined ) {
+            removeSymbol = removeSymbol.replace(/\D/g,'');
+            if (removeSymbol.length != 10) {
+                return "null";
+            } 
+        } else {
+            removeSymbol = null;
+        }
+        return removeSymbol;
+    };
+});
+</script>
+
+</body>
+</html>
+
